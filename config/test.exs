@@ -5,7 +5,7 @@ config :class_management_api, ClassManagementApi.Repo,
   username: "postgres",
   password: "postgres",
   database: "class_management_api_test",
-  hostname: "localhost",
+  hostname: "postgres",
   pool: Ecto.Adapters.SQL.Sandbox
 
 # We don't run a server during test. If one is required,

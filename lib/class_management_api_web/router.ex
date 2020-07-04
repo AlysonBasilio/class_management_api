@@ -7,5 +7,7 @@ defmodule ClassManagementApiWeb.Router do
 
   scope "/api", ClassManagementApiWeb do
     pipe_through :api
+
+    resources "/teachers", TeacherController, except: [:new, :edit]
   end
 end

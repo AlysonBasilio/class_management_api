@@ -9,5 +9,6 @@ defmodule ClassManagementApiWeb.Router do
     pipe_through :api
 
     resources "/teachers", TeacherController, except: [:new, :edit]
+    resources "/students", StudentController, except: [:new, :edit]
   end
 end

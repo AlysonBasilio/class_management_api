@@ -1,5 +1,16 @@
 # ClassManagementApi
 
+## ERD
+![ERD](docs/erd.png)
+
+## Setup Dockerized Development Environment
+
+```
+source dev.sh
+```
+
+## Setup Non Dockerized Development Environment
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`

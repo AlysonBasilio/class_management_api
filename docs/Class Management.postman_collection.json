@@ -1,0 +1,114 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Class Management",
+		"_postman_id": "24392df2-1de0-56ff-e1d8-774b294ec3a2",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Teacher",
+			"description": "",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"url": "{{PHOENIX_URL}}/api/teachers",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"teacher\": {\n\t\t\"cpf\": \"12312312312\"\n\t}\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Student",
+			"description": "",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"url": "{{PHOENIX_URL}}/api/students",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"student\": {\n\t\t\"name\": \"Bruce Wayne\"\n\t}\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Class",
+			"description": "",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"url": "{{PHOENIX_URL}}/api/classes",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"class\": {\n\t\t\"name\": \"1º Semestre\",\n\t\t\"teacher_id\": 2\n\t}\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Enroll Student To Class",
+					"request": {
+						"url": "{{PHOENIX_URL}}/api/classes/8/enroll-student",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"student_id\": 7\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Exam",
+			"description": "",
+			"item": []
+		}
+	]
+}

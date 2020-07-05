@@ -23,6 +23,8 @@ defmodule ClassManagementApi.Exams do
     Repo.all(Exam)
   end
 
+  def get_class_student_exam!(id), do: Repo.get!(ClassStudentExam, id)
+
   @doc """
   Gets a single exam.
 
@@ -72,6 +74,12 @@ defmodule ClassManagementApi.Exams do
   def update_exam(%Exam{} = exam, attrs) do
     exam
     |> Exam.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def update_class_student_exam(%ClassStudentExam{} = class_student_exam, attrs) do
+    class_student_exam
+    |> ClassStudentExam.changeset(attrs)
     |> Repo.update()
   end
 

@@ -2,31 +2,20 @@ defmodule ClassManagementApiWeb.ExamControllerTest do
   use ClassManagementApiWeb.ConnCase
 
   alias ClassManagementApi.Exams
-  alias ClassManagementApi.Users
   alias ClassManagementApi.Exams.Exam
 
-  def teacher_fixture(attrs \\ %{}) do
-    {:ok, teacher} =
-      attrs
-      |> Enum.into(%{cpf: "some cpf"})
-      |> Users.create_teacher()
-
-    teacher
-  end
-
+  @valid_attrs %{
+    subject: "some subject",
+    type: "some type"
+  }
   @update_attrs %{
     subject: "some updated subject",
     type: "some updated type"
   }
   @invalid_attrs %{subject: nil, type: nil}
 
-  def valid_attrs do
-    teacher = teacher_fixture()
-    %{subject: "some subject", type: "some type", teacher_id: teacher.id}
-  end
-
   def fixture(:exam) do
-    {:ok, exam} = Exams.create_exam(valid_attrs())
+    {:ok, exam} = Exams.create_exam(@valid_attrs)
     exam
   end
 
@@ -43,7 +32,7 @@ defmodule ClassManagementApiWeb.ExamControllerTest do
 
   describe "create exam" do
     test "renders exam when data is valid", %{conn: conn} do
-      conn = post(conn, Routes.exam_path(conn, :create), exam: valid_attrs())
+      conn = post(conn, Routes.exam_path(conn, :create), exam: @valid_attrs)
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
       conn = get(conn, Routes.exam_path(conn, :show, id))

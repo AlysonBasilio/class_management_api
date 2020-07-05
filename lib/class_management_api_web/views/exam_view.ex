@@ -13,7 +13,6 @@ defmodule ClassManagementApiWeb.ExamView do
   def render("exam.json", %{exam: exam}) do
     %{id: exam.id,
       subject: exam.subject,
-      type: exam.type,
-      teacher_id: exam.teacher_id}
+      type: exam.type}
   end
 end

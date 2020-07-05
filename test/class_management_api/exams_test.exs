@@ -4,30 +4,16 @@ defmodule ClassManagementApi.ExamsTest do
   alias ClassManagementApi.Exams
 
   describe "exams" do
-    alias ClassManagementApi.Users
     alias ClassManagementApi.Exams.Exam
 
-    def teacher_fixture(attrs \\ %{}) do
-      {:ok, teacher} =
-        attrs
-        |> Enum.into(%{cpf: "some cpf"})
-        |> Users.create_teacher()
-
-      teacher
-    end
-
+    @valid_attrs %{subject: "some subject", type: "some type"}
     @update_attrs %{subject: "some updated subject", type: "some updated type"}
     @invalid_attrs %{subject: nil, type: nil}
-
-    def valid_attrs do
-      teacher = teacher_fixture()
-      %{subject: "some subject", type: "some type", teacher_id: teacher.id}
-    end
 
     def exam_fixture(attrs \\ %{}) do
       {:ok, exam} =
         attrs
-        |> Enum.into(valid_attrs())
+        |> Enum.into(@valid_attrs)
         |> Exams.create_exam()
 
       exam
@@ -44,7 +30,7 @@ defmodule ClassManagementApi.ExamsTest do
     end
 
     test "create_exam/1 with valid data creates a exam" do
-      assert {:ok, %Exam{} = exam} = Exams.create_exam(valid_attrs())
+      assert {:ok, %Exam{} = exam} = Exams.create_exam(@valid_attrs)
       assert exam.subject == "some subject"
       assert exam.type == "some type"
     end

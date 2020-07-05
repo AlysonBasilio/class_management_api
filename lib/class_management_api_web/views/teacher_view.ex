@@ -12,6 +12,6 @@ defmodule ClassManagementApiWeb.TeacherView do
 
   def render("teacher.json", %{teacher: teacher}) do
     %{id: teacher.id,
-      cpf: teacher.cpf}
+      cpf: to_string(teacher.cpf)}
   end
 end

@@ -6,9 +6,9 @@ defmodule ClassManagementApi.UsersTest do
   describe "teachers" do
     alias ClassManagementApi.Users.Teacher
 
-    @valid_attrs %{cpf: "some cpf"}
-    @update_attrs %{cpf: "some updated cpf"}
-    @invalid_attrs %{cpf: nil}
+    @valid_attrs %{cpf: CPF.generate() |> to_string()}
+    @update_attrs %{cpf: CPF.generate() |> to_string()}
+    @invalid_attrs %{cpf: "nil"}
 
     def teacher_fixture(attrs \\ %{}) do
       {:ok, teacher} =
@@ -31,7 +31,8 @@ defmodule ClassManagementApi.UsersTest do
 
     test "create_teacher/1 with valid data creates a teacher" do
       assert {:ok, %Teacher{} = teacher} = Users.create_teacher(@valid_attrs)
-      assert teacher.cpf == "some cpf"
+      {:ok, inserted_cpf} = CPF.parse(@valid_attrs[:cpf])
+      assert teacher.cpf == inserted_cpf
     end
 
     test "create_teacher/1 with invalid data returns error changeset" do
@@ -41,7 +42,8 @@ defmodule ClassManagementApi.UsersTest do
     test "update_teacher/2 with valid data updates the teacher" do
       teacher = teacher_fixture()
       assert {:ok, %Teacher{} = teacher} = Users.update_teacher(teacher, @update_attrs)
-      assert teacher.cpf == "some updated cpf"
+      {:ok, updated_cpf} = CPF.parse(@update_attrs[:cpf])
+      assert teacher.cpf == updated_cpf
     end
 
     test "update_teacher/2 with invalid data returns error changeset" do

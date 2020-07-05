@@ -5,10 +5,10 @@ defmodule ClassManagementApiWeb.TeacherControllerTest do
   alias ClassManagementApi.Users.Teacher
 
   @create_attrs %{
-    cpf: "some cpf"
+    cpf: "60733541003"
   }
   @update_attrs %{
-    cpf: "some updated cpf"
+    cpf: "39041705031"
   }
   @invalid_attrs %{cpf: nil}
 
@@ -37,7 +37,7 @@ defmodule ClassManagementApiWeb.TeacherControllerTest do
 
       assert %{
                "id" => id,
-               "cpf" => "some cpf"
+               "cpf" => "60733541003"
              } = json_response(conn, 200)["data"]
     end
 
@@ -58,7 +58,7 @@ defmodule ClassManagementApiWeb.TeacherControllerTest do
 
       assert %{
                "id" => id,
-               "cpf" => "some updated cpf"
+               "cpf" => "39041705031"
              } = json_response(conn, 200)["data"]
     end
 

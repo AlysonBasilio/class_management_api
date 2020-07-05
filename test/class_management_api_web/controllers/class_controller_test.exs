@@ -8,7 +8,7 @@ defmodule ClassManagementApiWeb.ClassControllerTest do
   def teacher_fixture(attrs \\ %{}) do
     {:ok, teacher} =
       attrs
-      |> Enum.into(%{cpf: "some cpf"})
+      |> Enum.into(%{cpf: "60733541003"})
       |> Users.create_teacher()
 
     teacher

@@ -120,13 +120,54 @@
 						"description": ""
 					},
 					"response": []
+				},
+				{
+					"name": "Apply Exam To Class",
+					"request": {
+						"url": "{{PHOENIX_URL}}/api/classes/8/apply-exam",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"exam_id\": 4\n}"
+						},
+						"description": ""
+					},
+					"response": []
 				}
 			]
 		},
 		{
 			"name": "Exam",
 			"description": "",
-			"item": []
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"url": "{{PHOENIX_URL}}/api/exams",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"exam\": {\n\t\t\"type\": \"Multiple Choice\",\n\t\t\"subject\": \"Math\"\n\t}\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

@@ -3,7 +3,7 @@ defmodule ClassManagementApi.Exams.ClassStudentExam do
   import Ecto.Changeset
 
   schema "class_student_exams" do
-    field :status, :string
+    field :status, :string, default: "Applied"
     field :exam_id, :id
     field :class_student_id, :id
 

@@ -7,6 +7,8 @@ defmodule ClassManagementApi.Exams do
   alias ClassManagementApi.Repo
 
   alias ClassManagementApi.Exams.Exam
+  alias ClassManagementApi.Exams.ClassStudentExam
+  alias ClassManagementApi.Classes.ClassStudent
 
   @doc """
   Returns the list of exams.
@@ -100,5 +102,20 @@ defmodule ClassManagementApi.Exams do
   """
   def change_exam(%Exam{} = exam) do
     Exam.changeset(exam, %{})
+  end
+
+  def apply_exam_to_class(class_id, exam_id) do
+    query = from cs in ClassStudent,
+            where: cs.class_id == ^class_id,
+            select: cs.id
+    inserted_at =
+      NaiveDateTime.utc_now()
+      |> NaiveDateTime.truncate(:second)
+
+    class_student_exams =
+      Repo.all(query)
+      |> Enum.map(fn class_student_id -> %{exam_id: exam_id, class_student_id: class_student_id, inserted_at: inserted_at, updated_at: inserted_at} end)
+
+    Repo.insert_all(ClassStudentExam, class_student_exams, returning: true)
   end
 end

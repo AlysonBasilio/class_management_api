@@ -57,6 +57,25 @@ defmodule ClassManagementApi.Classes do
   end
 
   @doc """
+  Gets all students from a class.
+
+  Raises `Ecto.NoResultsError` if the Class does not exist.
+
+  ## Examples
+
+      iex> get_class_with_students!(123)
+      [%Student{}, ...]
+
+      iex> get_class_with_students!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_class_students!(id) do
+    class = get_class_with_students!(id)
+    class.students
+  end
+
+  @doc """
   Creates a class.
 
   ## Examples

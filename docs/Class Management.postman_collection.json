@@ -64,6 +64,24 @@
 			"description": "",
 			"item": [
 				{
+					"name": "Student",
+					"description": "",
+					"item": [
+						{
+							"name": "Index",
+							"request": {
+								"url": "{{PHOENIX_URL}}/api/classes/8/students",
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"description": ""
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
 					"name": "Create",
 					"request": {
 						"url": "{{PHOENIX_URL}}/api/classes",

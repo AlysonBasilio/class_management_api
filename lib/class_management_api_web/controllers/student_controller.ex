@@ -1,6 +1,7 @@
 defmodule ClassManagementApiWeb.StudentController do
   use ClassManagementApiWeb, :controller
 
+  alias ClassManagementApi.Classes
   alias ClassManagementApi.Users
   alias ClassManagementApi.Users.Student
 
@@ -8,6 +9,11 @@ defmodule ClassManagementApiWeb.StudentController do
 
   def index(conn, _params) do
     students = Users.list_students()
+    render(conn, "index.json", students: students)
+  end
+
+  def index_class_students(conn, %{"class_id" => class_id}) do
+    students = Classes.get_class_students!(class_id)
     render(conn, "index.json", students: students)
   end
 

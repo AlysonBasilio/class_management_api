@@ -3,6 +3,7 @@ defmodule ClassManagementApiWeb.ClassController do
 
   alias ClassManagementApi.Classes
   alias ClassManagementApi.Classes.Class
+  alias ClassManagementApi.Users
 
   action_fallback ClassManagementApiWeb.FallbackController
 
@@ -38,6 +39,15 @@ defmodule ClassManagementApiWeb.ClassController do
 
     with {:ok, %Class{}} <- Classes.delete_class(class) do
       send_resp(conn, :no_content, "")
+    end
+  end
+
+  def enroll_student(conn, %{"class_id" => class_id, "student_id" => student_id}) do
+    class = Classes.get_class_with_students!(class_id)
+    student = Users.get_student!(student_id)
+
+    with {:ok, %Class{} = class} <- Classes.add_student_to_class(class, student) do
+      render(conn, "show.json", class: class)
     end
   end
 end

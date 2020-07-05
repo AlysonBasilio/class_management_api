@@ -43,6 +43,12 @@ defmodule ClassManagementApi.ClassesTest do
       assert Classes.get_class!(class.id) == class
     end
 
+    test "get_class_with_students!/1 returns the class with given all it students" do
+      class = class_fixture()
+      class_with_students = Classes.get_class_with_students!(class.id)
+      assert [] == class_with_students.students
+    end
+
     test "create_class/1 with valid data creates a class" do
       assert {:ok, %Class{} = class} = Classes.create_class(valid_attrs())
       assert class.name == "some name"

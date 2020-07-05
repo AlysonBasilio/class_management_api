@@ -38,6 +38,25 @@ defmodule ClassManagementApi.Classes do
   def get_class!(id), do: Repo.get!(Class, id)
 
   @doc """
+  Gets a single class with all students.
+
+  Raises `Ecto.NoResultsError` if the Class does not exist.
+
+  ## Examples
+
+      iex> get_class_with_students!(123)
+      %Class{}
+
+      iex> get_class_with_students!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_class_with_students!(id) do
+    get_class!(id)
+      |> Repo.preload(:students)
+  end
+
+  @doc """
   Creates a class.
 
   ## Examples
@@ -100,5 +119,12 @@ defmodule ClassManagementApi.Classes do
   """
   def change_class(%Class{} = class) do
     Class.changeset(class, %{})
+  end
+
+  def add_student_to_class(class, student) do
+    new_students = Enum.concat(class.students, [student])
+    class
+    |> Class.changeset_update_students(new_students)
+    |> Repo.update()
   end
 end

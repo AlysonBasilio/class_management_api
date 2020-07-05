@@ -1,0 +1,1 @@
+docker container run --rm -v $(pwd):/app -w /app --user $(id -u):$(id -g) --name class_management_api --network poc_network --network-alias order-api --publish 4000:4000 elixir-phoenix:alyson mix phx.server

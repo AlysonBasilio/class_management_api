@@ -12,6 +12,7 @@ defmodule ClassManagementApiWeb.ClassView do
 
   def render("class.json", %{class: class}) do
     %{id: class.id,
-      name: class.name}
+      name: class.name,
+      teacher_id: class.teacher_id}
   end
 end

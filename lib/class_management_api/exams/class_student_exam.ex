@@ -14,6 +14,8 @@ defmodule ClassManagementApi.Exams.ClassStudentExam do
   def changeset(class_student_exam, attrs) do
     class_student_exam
     |> cast(attrs, [:status, :exam_id, :class_student_id])
+    |> foreign_key_constraint(:exam_id)
+    |> foreign_key_constraint(:class_student_id)
     |> validate_required([:status, :exam_id, :class_student_id])
   end
 end

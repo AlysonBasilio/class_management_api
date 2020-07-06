@@ -6,6 +6,7 @@ defmodule ClassManagementApi.ClassesTest do
   describe "classes" do
     alias ClassManagementApi.Users
     alias ClassManagementApi.Classes.Class
+    alias ClassManagementApi.Classes.ClassStudent
 
     def teacher_fixture(attrs \\ %{}) do
       {:ok, teacher} =
@@ -99,6 +100,24 @@ defmodule ClassManagementApi.ClassesTest do
     test "change_class/1 returns a class changeset" do
       class = class_fixture()
       assert %Ecto.Changeset{} = Classes.change_class(class)
+    end
+
+    test "add_student_to_class/1 with valid data creates a class_student" do
+      class = class_fixture()
+      {:ok, student} = Users.create_student(%{name: "Bruce Wayne"})
+      assert {:ok, %ClassStudent{} = class_student} = Classes.add_student_to_class(class.id, student.id)
+      assert class_student.class_id == class.id
+      assert class_student.student_id == student.id
+    end
+
+    test "add_student_to_class/1 with inexistent class returns error changeset" do
+      {:ok, student} = Users.create_student(%{name: "Bruce Wayne"})
+      assert {:error, %Ecto.Changeset{}} = Classes.add_student_to_class(1, student.id)
+    end
+
+    test "add_student_to_class/1 with inexistent student returns error changeset" do
+      class = class_fixture()
+      assert {:error, %Ecto.Changeset{}} = Classes.add_student_to_class(class.id, 1)
     end
   end
 end

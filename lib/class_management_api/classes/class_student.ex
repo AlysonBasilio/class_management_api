@@ -13,6 +13,8 @@ defmodule ClassManagementApi.Classes.ClassStudent do
   def changeset(class_student, attrs) do
     class_student
     |> cast(attrs, [:student_id, :class_id])
+    |> foreign_key_constraint(:student_id)
+    |> foreign_key_constraint(:class_id)
     |> validate_required([:student_id, :class_id])
   end
 end

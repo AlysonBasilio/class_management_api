@@ -7,6 +7,7 @@ defmodule ClassManagementApi.Classes do
   alias ClassManagementApi.Repo
 
   alias ClassManagementApi.Classes.Class
+  alias ClassManagementApi.Classes.ClassStudent
 
   @doc """
   Returns the list of classes.
@@ -140,10 +141,9 @@ defmodule ClassManagementApi.Classes do
     Class.changeset(class, %{})
   end
 
-  def add_student_to_class(class, student) do
-    new_students = Enum.concat(class.students, [student])
-    class
-    |> Class.changeset_update_students(new_students)
-    |> Repo.update()
+  def add_student_to_class(class_id, student_id) do
+    %ClassStudent{}
+    |> ClassStudent.changeset(%{class_id: class_id, student_id: student_id})
+    |> Repo.insert()
   end
 end

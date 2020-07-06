@@ -59,9 +59,8 @@ defmodule ClassManagementApi.ClassesTest do
 
     test "get_class_students!/1 returns the class with given all it students" do
       class = class_fixture()
-      class_with_students = Classes.get_class_with_students!(class.id)
       {:ok, student} = Users.create_student(%{name: "Bruce Wayne"})
-      Classes.add_student_to_class(class_with_students, student)
+      Classes.add_student_to_class(class.id, student.id)
       class_students = Classes.get_class_students!(class.id)
       assert [student] == class_students
     end

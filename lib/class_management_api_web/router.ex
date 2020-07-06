@@ -22,7 +22,7 @@ defmodule ClassManagementApiWeb.Router do
     resources "/class-student-exam", ClassStudentExamController, except: [:new, :edit, :create, :delete, :index, :show]
     resources "/classes", ClassController, except: [:new, :edit] do
       post "/apply-exam", ClassStudentExamController, :apply_exam_to_class
-      post "/enroll-student", ClassController, :enroll_student
+      post "/enroll-student", ClassStudentController, :enroll_student
       get "/students", StudentController, :index_class_students
     end
     resources "/teachers", TeacherController, except: [:new, :edit]

@@ -3,6 +3,7 @@ defmodule ClassManagementApiWeb.TeacherControllerTest do
 
   alias ClassManagementApi.Users
   alias ClassManagementApi.Users.Teacher
+  alias ClassManagementApiWeb.JwtAuthToken
 
   @create_attrs %{
     cpf: "60733541003"
@@ -18,7 +19,11 @@ defmodule ClassManagementApiWeb.TeacherControllerTest do
   end
 
   setup %{conn: conn} do
-    {:ok, conn: put_req_header(conn, "accept", "application/json")}
+    conn =
+      put_req_header(conn, "accept", "application/json")
+      |> put_req_header("authorization", "Bearer #{JwtAuthToken.generate()}")
+
+    {:ok, conn: conn}
   end
 
   describe "index" do

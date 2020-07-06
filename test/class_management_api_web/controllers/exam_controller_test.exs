@@ -3,6 +3,7 @@ defmodule ClassManagementApiWeb.ExamControllerTest do
 
   alias ClassManagementApi.Exams
   alias ClassManagementApi.Exams.Exam
+  alias ClassManagementApiWeb.JwtAuthToken
 
   @valid_attrs %{
     subject: "some subject",
@@ -20,7 +21,11 @@ defmodule ClassManagementApiWeb.ExamControllerTest do
   end
 
   setup %{conn: conn} do
-    {:ok, conn: put_req_header(conn, "accept", "application/json")}
+    conn =
+      put_req_header(conn, "accept", "application/json")
+      |> put_req_header("authorization", "Bearer #{JwtAuthToken.generate()}")
+
+    {:ok, conn: conn}
   end
 
   describe "index" do

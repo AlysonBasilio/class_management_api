@@ -34,14 +34,15 @@ defmodule ClassManagementApi.MixProject do
   defp deps do
     [
       {:cpf, "~> 1.0"},
+      {:ecto_sql, "~> 3.1"},
+      {:gettext, "~> 0.11"},
+      {:jason, "~> 1.0"},
+      {:joken, "~> 2.2"},
       {:phoenix, "~> 1.4.13"},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_ecto, "~> 4.0"},
-      {:ecto_sql, "~> 3.1"},
-      {:postgrex, ">= 0.0.0"},
-      {:gettext, "~> 0.11"},
-      {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:postgrex, ">= 0.0.0"}
     ]
   end
 

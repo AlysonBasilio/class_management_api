@@ -3,6 +3,7 @@ defmodule ClassManagementApiWeb.StudentControllerTest do
 
   alias ClassManagementApi.Users
   alias ClassManagementApi.Users.Student
+  alias ClassManagementApiWeb.JwtAuthToken
 
   @create_attrs %{
     name: "some name"
@@ -18,7 +19,11 @@ defmodule ClassManagementApiWeb.StudentControllerTest do
   end
 
   setup %{conn: conn} do
-    {:ok, conn: put_req_header(conn, "accept", "application/json")}
+    conn =
+      put_req_header(conn, "accept", "application/json")
+      |> put_req_header("authorization", "Bearer #{JwtAuthToken.generate()}")
+
+    {:ok, conn: conn}
   end
 
   describe "index" do

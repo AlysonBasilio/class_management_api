@@ -4,6 +4,7 @@ defmodule ClassManagementApiWeb.ClassControllerTest do
   alias ClassManagementApi.Classes
   alias ClassManagementApi.Users
   alias ClassManagementApi.Classes.Class
+  alias ClassManagementApiWeb.JwtAuthToken
 
   def teacher_fixture(attrs \\ %{}) do
     {:ok, teacher} =
@@ -30,7 +31,11 @@ defmodule ClassManagementApiWeb.ClassControllerTest do
   end
 
   setup %{conn: conn} do
-    {:ok, conn: put_req_header(conn, "accept", "application/json")}
+    conn =
+      put_req_header(conn, "accept", "application/json")
+      |> put_req_header("authorization", "Bearer #{JwtAuthToken.generate()}")
+
+    {:ok, conn: conn}
   end
 
   describe "index" do

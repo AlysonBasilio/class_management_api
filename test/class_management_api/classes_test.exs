@@ -10,7 +10,7 @@ defmodule ClassManagementApi.ClassesTest do
     def teacher_fixture(attrs \\ %{}) do
       {:ok, teacher} =
         attrs
-        |> Enum.into(%{cpf: "99815485024"})
+        |> Enum.into(%{cpf: CPF.generate() |> to_string()})
         |> Users.create_teacher()
 
       teacher
@@ -43,10 +43,31 @@ defmodule ClassManagementApi.ClassesTest do
       assert Classes.get_class!(class.id) == class
     end
 
+    test "get_class!/1 raises an error when class with given id doesn't exist" do
+      assert_raise Ecto.NoResultsError, fn -> Classes.get_class!(1) end
+    end
+
     test "get_class_with_students!/1 returns the class with given all it students" do
       class = class_fixture()
       class_with_students = Classes.get_class_with_students!(class.id)
       assert [] == class_with_students.students
+    end
+
+    test "get_class_with_students!/1 raises an error when class with given all doesn't exist" do
+      assert_raise Ecto.NoResultsError, fn -> Classes.get_class_with_students!(1) end
+    end
+
+    test "get_class_students!/1 returns the class with given all it students" do
+      class = class_fixture()
+      class_with_students = Classes.get_class_with_students!(class.id)
+      student = Users.create_student(%{name: "Bruce Wayne"})
+      Classes.add_student_to_class(class_with_students, student)
+      class_students = Classes.get_class_students!(class.id)
+      assert [student] == class_students
+    end
+
+    test "get_class_students!/1 raises an error when class with given all doesn't exist" do
+      assert_raise Ecto.NoResultsError, fn -> Classes.get_class_students!(1) end
     end
 
     test "create_class/1 with valid data creates a class" do

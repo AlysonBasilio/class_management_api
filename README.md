@@ -4,7 +4,7 @@
 ![ERD](docs/erd.png)
 
 ## Setup Postman Collection
-Import [Class Management.postman_collection.json](docs/Class Management.postman_collection.json) to your Postman and start to use all Routes.
+Import [Class Management.postman_collection.json](https://github.com/AlysonBasilio/class_management_api/blob/master/docs/Class%20Management.postman_collection.json) to your Postman and start to use all Routes.
 
 ## Setup Dockerized Development Environment
 

@@ -21,11 +21,16 @@
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{JWT_TOKEN}}",
+								"description": ""
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"teacher\": {\n\t\t\"cpf\": \"12312312312\"\n\t}\n}"
+							"raw": "{\n\t\"teacher\": {\n\t\t\"cpf\": \"04681040380\"\n\t}\n}"
 						},
 						"description": ""
 					},
@@ -46,6 +51,11 @@
 							{
 								"key": "Content-Type",
 								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{JWT_TOKEN}}",
 								"description": ""
 							}
 						],
@@ -72,7 +82,13 @@
 							"request": {
 								"url": "{{PHOENIX_URL}}/api/classes/8/students",
 								"method": "GET",
-								"header": [],
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{JWT_TOKEN}}",
+										"description": ""
+									}
+								],
 								"body": {},
 								"description": ""
 							},
@@ -91,11 +107,16 @@
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{JWT_TOKEN}}",
+								"description": ""
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"class\": {\n\t\t\"name\": \"1º Semestre\",\n\t\t\"teacher_id\": 2\n\t}\n}"
+							"raw": "{\n\t\"class\": {\n\t\t\"name\": \"1º Semestre\",\n\t\t\"teacher_id\": 3\n\t}\n}"
 						},
 						"description": ""
 					},
@@ -104,18 +125,23 @@
 				{
 					"name": "Enroll Student To Class",
 					"request": {
-						"url": "{{PHOENIX_URL}}/api/classes/8/enroll-student",
+						"url": "{{PHOENIX_URL}}/api/classes/10/enroll-student",
 						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{JWT_TOKEN}}",
+								"description": ""
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"student_id\": 7\n}"
+							"raw": "{\n\t\"student_id\": 8\n}"
 						},
 						"description": ""
 					},
@@ -130,6 +156,11 @@
 							{
 								"key": "Content-Type",
 								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{JWT_TOKEN}}",
 								"description": ""
 							}
 						],
@@ -157,6 +188,11 @@
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{JWT_TOKEN}}",
+								"description": ""
 							}
 						],
 						"body": {
@@ -183,6 +219,11 @@
 								"key": "Content-Type",
 								"value": "application/json",
 								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{JWT_TOKEN}}",
+								"description": ""
 							}
 						],
 						"body": {
@@ -194,6 +235,38 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Generate Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"JWT_TOKEN\", jsonData.token);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{PHOENIX_URL}}/api/generate-token",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }

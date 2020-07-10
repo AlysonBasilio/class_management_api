@@ -12,6 +12,8 @@ defmodule ClassManagementApiWeb.ClassStudentExamView do
 
   def render("class_student_exam.json", %{class_student_exam: class_student_exam}) do
     %{id: class_student_exam.id,
-      status: class_student_exam.status}
+      status: class_student_exam.status,
+      class_student_id: class_student_exam.class_student_id,
+      exam_id: class_student_exam.exam_id}
   end
 end
